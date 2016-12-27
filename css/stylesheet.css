@@ -198,7 +198,10 @@ ul.to-do li .button button.complete svg
   border-radius: 11px;
   border: 1.5px solid #25b99a;
 
-  transition: background 0.2s ease; 
+  -webkit-transition: background 0.2 ease;
+  -moz-transition: background 0.2 ease;
+  -ms-transition: background 0.2 ease;
+  transition: background 0.2s ease;
 }
 
 ul.to-do li .button button.complete svg .fill
@@ -225,4 +228,22 @@ ul.to-do:not(#completed) li .button button.complete:hover svg
 ul.to-do:not(#completed) li .button button.complete:hover svg .fill
 {
   fill: #fff
+}
+
+ul.to-do#completed:not(:empty)
+{
+  position: relative;
+  padding: 60px 0 0 0;
+}
+
+ul.to-do#completed:not(:empty):before
+{
+  content: '';
+  width: 150px;
+  height: 1px;
+  background: #dBe5e0;
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  margin: 0 0 0 -75px;
 }

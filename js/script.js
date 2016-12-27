@@ -8,8 +8,32 @@ function buttonClicked()
   var value = document.getElementById('item').value;
   if(value)
   {
-    addItemToDo(value);  
+    addItemToDo(value);
+    document.getElementById('item').value = '';
   }
+}
+
+function removeItemFromList()
+{
+  var item = this.parentNode.parentNode;
+  var list = item.parentNode;
+
+  list.removeChild(item);
+}
+
+function completeItem()
+{
+  var item = this.parentNode.parentNode;
+  var list = item.parentNode;
+  var targetList;
+
+  if(list.id == 'to-do')
+    targetList = document.getElementById('completed');
+  else
+    targetList = document.getElementById('to-do');
+
+  list.removeChild(item);
+  targetList.insertBefore(item, targetList.childNodes[0]);
 }
 
 function addItemToDo(text)
@@ -24,12 +48,16 @@ function addItemToDo(text)
   remove.classList.add('remove');
   remove.innerHTML = removeIcon;
 
+  remove.addEventListener('click', removeItemFromList);
+
   var complete = document.createElement('button');
   complete.classList.add('complete');
   complete.innerHTML = completeIcon;
 
-  button.appendChild(remove);
+  complete.addEventListener('click', completeItem);
+
   button.appendChild(complete);
+  button.appendChild(remove);
   item.appendChild(button);
 
   var list = document.getElementById('to-do');
